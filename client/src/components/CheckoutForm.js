@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from '../hooks/useForm'
 
 const initialValue = {
   firstName: "",
@@ -15,15 +16,15 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
+  const [successMessageValues, setSuccessMessageValues] = useState(initialValue)
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  const [values, handleChanges, clearForm] = useForm(initialValue);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowSuccessMessage(true);
+    setSuccessMessageValues(values)
+    clearForm();
   };
 
   return (
@@ -78,11 +79,11 @@ const CheckoutForm = (props) => {
           <br />
           <br />
           <p>
-            {values.firstName} {values.lastName}
+            {successMessageValues.firstName} {successMessageValues.lastName}
           </p>
-          <p>{values.address}</p>
+          <p>{successMessageValues.address}</p>
           <p>
-            {values.city}, {values.state} {values.zip}
+            {successMessageValues.city}, {successMessageValues.state} {successMessageValues.zip}
           </p>
         </div>
       )}
