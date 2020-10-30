@@ -33,7 +33,7 @@ const CheckoutForm = (props) => {
         <h2>Checkout Form</h2>
         <label>
           First Name:
-          <input
+          <input            
             name="firstName"
             value={values.firstName}
             onChange={handleChanges}
